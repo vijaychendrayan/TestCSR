@@ -3,6 +3,8 @@ import * as pkijs from "pkijs";
 import * as asn1js from "asn1js";
 import * as pvtsutils from "pvtsutils";
 
+// Function used for formatting the CSR content
+
 function formatPEM(pemString) {
     const PEM_STRING_LENGTH = pemString.length, LINE_LENGTH = 64;
     const wrapNeeded = PEM_STRING_LENGTH > LINE_LENGTH;
@@ -20,6 +22,7 @@ function formatPEM(pemString) {
     }
 }
 
+// Function used for formatting the CSR content
 function toPEM(buffer, tag) {
     return [
         `-----BEGIN ${tag}-----`,
@@ -29,6 +32,7 @@ function toPEM(buffer, tag) {
     ].join("\n");
 }
 
+// Function to create the CSR request.
 async function createRequest(){
     const signAlg = 'ECDSA'
     const hashAlg = 'SHA-1'
