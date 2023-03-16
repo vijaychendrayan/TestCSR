@@ -103,23 +103,35 @@ async function createRequest(){
   
 
 }
+
+
+const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+
 class Message extends Component{
 
     constructor(){
         super()
         this.state={
-            message: 'CSR Request Generator'
-
+            message: 'CSR Request Generator',
+            csrMessage:'Default'
+            
         }
+        
     }
-    changeMessage(){
+    async changeMessage(){
 
-        const csrRequest =  createRequest();
-        // this.setState({
-        //     message: csrRequest
-        // })
+        const csrRequest =  await createRequest();
+        await delay(4000);
+
+        this.setState({
+            csrMessage: csrRequest
+        })
 
         console.log(csrRequest)
+
+        
     }
     
     // async createRequest(){
@@ -202,9 +214,8 @@ class Message extends Component{
             <div>
                 <h1> {this.state.message} </h1>
                 <button onClick={()=> this.changeMessage()}>Generate Request</button>
-                <div>
-                <textarea> </textarea>
-                </div>
+                <textarea id="w3review" name="w3review" rows="30" cols="100" value={this.state.csrMessage} /> 
+                
                 
             </div>
             
