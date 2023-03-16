@@ -121,26 +121,22 @@ class Message extends Component{
         
     }
     async changeMessage(){
-
         const csrRequest =  await createRequest();
         await delay(4000);
-
         this.setState({
             csrMessage: csrRequest
         })
-
         console.log(csrRequest)
-        
     }
     
     render() {
         return (
             <div>
+                <div>
                 <h1> {this.state.message} </h1>
-                <button onClick={()=> this.changeMessage()}>Generate Request</button>
                 <textarea id="w3review" name="w3review" rows="30" cols="100" value={this.state.csrMessage} /> 
-                
-                
+                </div>
+                <button onClick={()=> this.changeMessage()}>Generate Request</button>
             </div>
             
         )
