@@ -37,7 +37,7 @@ async function createRequest(){
     pkcs10.version = 0;
     pkcs10.subject.typesAndValues.push(new pkijs.AttributeTypeAndValue({
         type: "2.5.4.6",
-        value: new asn1js.PrintableString({ value: "RU" })
+        value: new asn1js.PrintableString({ value: "IN" })
     }));
     pkcs10.subject.typesAndValues.push(new pkijs.AttributeTypeAndValue({
         type: "2.5.4.3",
@@ -47,11 +47,11 @@ async function createRequest(){
         names: [
             new pkijs.GeneralName({
                 type: 1,
-                value: "email@address.com"
+                value: "createCSRrequest@address.com"
             }),
             new pkijs.GeneralName({
                 type: 2,
-                value: "www.domain.com"
+                value: "www.CreateCSRtest.com"
             }),
             new pkijs.GeneralName({
                 type: 2,
@@ -130,85 +130,9 @@ class Message extends Component{
         })
 
         console.log(csrRequest)
-
         
     }
     
-    // async createRequest(){
-    //     const signAlg = 'ECDSA'
-    //     const hashAlg = 'SHA-1'
-    //     const pkcs10 = new pkijs.CertificationRequest();
-    //     const crypto = pkijs.getCrypto(true);
-    //     pkcs10.version = 0;
-    //     pkcs10.subject.typesAndValues.push(new pkijs.AttributeTypeAndValue({
-    //         type: "2.5.4.6",
-    //         value: new asn1js.PrintableString({ value: "RU" })
-    //     }));
-    //     pkcs10.subject.typesAndValues.push(new pkijs.AttributeTypeAndValue({
-    //         type: "2.5.4.3",
-    //         value: new asn1js.Utf8String({ value: "Simple test" })
-    //     }));
-    //     const altNames = new pkijs.GeneralNames({
-    //         names: [
-    //             new pkijs.GeneralName({
-    //                 type: 1,
-    //                 value: "email@address.com"
-    //             }),
-    //             new pkijs.GeneralName({
-    //                 type: 2,
-    //                 value: "www.domain.com"
-    //             }),
-    //             new pkijs.GeneralName({
-    //                 type: 2,
-    //                 value: "www.anotherdomain.com"
-    //             }),
-    //             new pkijs.GeneralName({
-    //                 type: 7,
-    //                 value: new asn1js.OctetString({ valueHex: (new Uint8Array([0xC0, 0xA8, 0x00, 0x01])).buffer })
-    //             }),
-    //         ]
-    //     });
-    //     pkcs10.attributes = [];
-    //     const algorithm = pkijs.getAlgorithmParameters(signAlg, "generateKey");
-    //     // console.log(algorithm);
-    //     // algorithm.algorithm.hash.name = 'SHA-1';
-    //     // algorithm.algorithm.hashAlg  = 'SHA-1';
-    //     const { privateKey, publicKey } = await crypto.generateKey(algorithm.algorithm, true, algorithm.usages);
-    //     // console.log(privateKey);
-    //     // console.log(publicKey);
-    //     await pkcs10.subjectPublicKeyInfo.importKey(publicKey);
-    //     const subjectKeyIdentifier = await crypto.digest({ name: "SHA-1" }, pkcs10.subjectPublicKeyInfo.subjectPublicKey.valueBlock.valueHexView);
-    //     pkcs10.attributes.push(new pkijs.Attribute({
-    //         type: "1.2.840.113549.1.9.14",
-    //         values: [(new pkijs.Extensions({
-    //                 extensions: [
-    //                     new pkijs.Extension({
-    //                         extnID: "2.5.29.14",
-    //                         critical: false,
-    //                         extnValue: (new asn1js.OctetString({ valueHex: subjectKeyIdentifier })).toBER(false)
-    //                     }),
-    //                     new pkijs.Extension({
-    //                         extnID: "2.5.29.17",
-    //                         critical: false,
-    //                         extnValue: altNames.toSchema().toBER(false)
-    //                     }),
-    //                     new pkijs.Extension({
-    //                         extnID: "1.2.840.113549.1.9.7",
-    //                         critical: false,
-    //                         extnValue: (new asn1js.PrintableString({ value: "passwordChallenge" })).toBER(false)
-    //                     })
-    //                 ]
-    //             })).toSchema()]
-    //     }));
-    //     await pkcs10.sign(privateKey, hashAlg);
-    //     // console.log(formatPEM(pvtsutils.Convert.ToBase64(pkcs10.toSchema().toBER(false))));
-    //     const buffer = pkcs10.toSchema().toBER(false);
-    //     const tag = 'CERTIFICATE REQUEST';
-    //     console.log(toPEM(buffer, tag))
-
-        
-    
-    // }
     render() {
         return (
             <div>
